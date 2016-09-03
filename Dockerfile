@@ -7,5 +7,5 @@ COPY newrelic-glusterfs-monitoring /plugin
 WORKDIR /plugin
 ENV NEW_RELIC_LICENSE_KEY
 COPY newrelic-agent.cfg /plugins/newrelic-agent.cfg
-RUN sed -i -e 's/^license_key=.*$/license_key=$NEW_RELIC_LICENSE_KEY/g' -e 's/^file=\/tmp\/nfs-pluggin.log//file=/dev/stdout/g'
+RUN sed -i newrelic-agent.cfg -e "s/^license_key=.*$/license_key=$NEW_RELIC_LICENSE_KEY/g" -e "s/^file=\/tmp\/nfs-pluggin.log/file=\/dev\/stdout/g"
 CMD newrelic-glusterfs-monitoring
